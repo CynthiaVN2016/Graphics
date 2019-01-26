@@ -1,0 +1,111 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Final Project</title>
+
+<script type="text/javascript" src="./setup.js"></script>
+<script type="text/javascript" src="./vector.js"></script>
+<script type="text/javascript" src="./render.js"></script>
+<script type="text/javascript" src="./trace.js"></script>
+<script type="text/javascript" src="./sphere.js"></script>
+<script type="text/javascript" src="./triangle.js"></script>
+<script type="text/javascript" src="./surface.js"></script>
+<script type="text/javascript" src="./intersection.js"></script>
+
+ <script type="text/javascript">
+
+var c, height, width;
+var ctx, data;
+var myScene;
+var scene = {};
+var toReflect, toRefract;
+var objectLength = 0;
+
+// images are the 6 faces' imageData
+var images = [6];
+
+var planet1 = 0,
+    planet2 = 0,
+    bigSphere = 0;
+var moveRight = true;
+
+const POSX = 0,
+      POSY = 1,
+      POSZ = 2,
+      NEGX = 3,
+      NEGY = 4,
+      NEGZ = 5;
+
+function tick() {
+	planet1 += 0.2;
+  bigSphere += 0.2;
+
+  if (objectLength == 11) {
+  	myScene.objects[0].point.x = Math.cos(bigSphere) * 3;
+    myScene.objects[0].point.y = (-3 + (Math.sin(bigSphere) * 3)) + 3;
+  } else {
+    myScene.objects[1].point.x = Math.sin(planet1) * 4;
+    myScene.objects[1].point.z = -3 + (Math.cos(planet1) * 4);
+  }
+
+	render(myScene);
+
+	if (playing) setTimeout(tick, 1);
+}
+
+
+var playing = false;
+
+function play() {
+    playing = true;
+    tick();
+}
+
+function stop() {
+    playing = false;
+}
+
+function start() {
+
+  parseFile();
+  objectLength = myScene.objects.length;
+
+  var c = document.getElementById('c');
+  toReflect = document.getElementById('reflect').checked;
+  toRefract = document.getElementById('refract').checked;
+  width = c.width,
+  height = c.height;
+
+  ctx = c.getContext('2d');
+  data = ctx.getImageData(0, 0, width, height);
+
+  render(myScene);
+};
+
+
+</script>
+
+</head>
+<body onload="setUp()">
+  <input type="file" id="file" name="file" multiple /> <p>
+  Upload json data file first and then draw <p>
+
+  Select the type of environmental mapping (defaults to reflective):
+    <div>
+    <input type="checkbox" id="reflect" name="reflect">
+    <label for="scales">Reflective</label>
+    </div>
+    <div>
+    <input type="checkbox" id="refract" name="refract">
+    <label for="horns">Refractive</label>
+    </div>
+  Draw the Scene <input id="draw" type="button" onclick="start()">
+  <output id="list"></output>
+	<center>
+	<canvas id="c" width="600" height="600">
+		If you are seeing this message your web browser does not support the HTML5 &lt;canvas>&gt; element.
+	</canvas>
+	play <input id="play" type="button" onclick="play()"> stop <input id="play" type="button" onclick="stop()">
+	</center>
+</body>
+</html>
