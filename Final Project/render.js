@@ -25,8 +25,6 @@ function render(scene) {
         for (var y = 0; y < height; y++) {
           var xcomp = Vector.scale(vpRight, (x * pixelWidth) - halfWidth),
                ycomp = Vector.scale(vpUp, (y * pixelHeight) - halfHeight);
-               // var xcomp = Vector.scale(vpRight, x),
-               //      ycomp = Vector.scale(vpUp, y);
 
                if (xcomp.x > xmax) xmax = xcomp.x;
                if (xcomp.x < xmin) xmin = xcomp.x;

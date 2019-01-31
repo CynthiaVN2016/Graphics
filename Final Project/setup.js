@@ -1,3 +1,5 @@
+
+// Loads the environment images
 function loadData(face, imgsrc) {
   var tempCanvas = document.createElement('canvas');
   var tempContext = tempCanvas.getContext('2d');
@@ -12,6 +14,8 @@ function loadData(face, imgsrc) {
     img.src = imgsrc;
 }
 
+// Associates certain face to a const index
+// images[POSX] returns the imagedata for the positive x face
 function setUp() {
 
   loadData(POSX, './Cube Images/posx.jpg');
@@ -22,6 +26,7 @@ function setUp() {
   loadData(NEGZ, './Cube Images/negz.jpg');
 }
 
+// Takes a json file and parses it to get the scene
 function parseFile() {
 
   var url = document.getElementById("file").files[0].name;
@@ -36,6 +41,7 @@ function parseFile() {
   xmlhttp.send();
 }
 
+// used to save the canvas as a png after every load
 function getCanvasAsPNG(canvasId, pngName) {
 	let uri = document.getElementById(canvasId).toDataURL("image/png");
 

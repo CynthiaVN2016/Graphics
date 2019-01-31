@@ -1,5 +1,5 @@
-
-
+// Checks intersection point of a ray and the objects in the scene
+// Return appropriate color of the pixel by calling surface
 function trace(ray, scene, depth) {
   if (depth > 3) return;
 

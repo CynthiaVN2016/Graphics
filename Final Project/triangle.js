@@ -1,7 +1,7 @@
 
-// ## Detecting collisions against a triangle
-
-//
+// Detecting collisions against a triangle
+// Based code of mathematical equation from the textbook
+// Fundamentals of Computer Science by Marschner & Shirley
 function triIntersection(tri, ray) {
 
   var pointA = tri.point1;
@@ -47,10 +47,8 @@ function triIntersection(tri, ray) {
 
 }
 
-// A normal is, at each point on the surface of a sphere or some other object,
-// a vector that's perpendicular to the surface and radiates outward. We need
-// to know this so that we can calculate the way that a ray reflects off of
-// a surface.
+// Calculates the normal of a triangle
+
 function triNormal(tri) {
   var pointA = tri.point1;
   var pointB = tri.point2;
@@ -69,10 +67,7 @@ function findTriColor(scene, object, pointAtTime) {
     var uScaled, vScaled;
     var index;
 
-    // var uDir = Vector.subtract(p1, p2),
-    //     vDir = Vector.subtract(p3, p2);
-
-    if (face == POSZ || face == NEGZ) { // using the x & y coordinates
+    if (face == POSZ || face == NEGZ) { // using the x & y coordinates to sample images.
       uScaled = ( pointAtTime.x / 10 + 0.5) * 1024;
       vScaled = ( pointAtTime.y / 10 + 0.5) * 1024;
 

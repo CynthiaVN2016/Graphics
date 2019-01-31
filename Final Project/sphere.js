@@ -1,4 +1,5 @@
 
+// finds the point of intersection of a ray and sphere
 function sphereIntersection(sphere, ray) {
     var eye_to_center = Vector.subtract(sphere.point, ray.point),
         v = Vector.dotProduct(eye_to_center, ray.vector),
@@ -11,15 +12,14 @@ function sphereIntersection(sphere, ray) {
     }
 }
 
-
+// returns the normal of the sphere at a certain point
 function sphereNormal(sphere, pos) {
-
     return Vector.unitVector(
         Vector.subtract(pos, sphere.point));
 }
 
-// takes one face's imagedata and find the pixel associated with either the
-// reflected or refractedRay
+
+// takes one face's imagedata and find the pixel associated with the reflectedRay
 function envMapColor(face, reflectedRay) {
   var imageData = images[face];
   var xComp = Math.abs(reflectedRay.x),
@@ -60,7 +60,6 @@ function envMapColor(face, reflectedRay) {
   }
 
 // Finds the correct face based on the reflectedRay
-// the reflectedRay might actually be the refractedRay
 function findFaceAndColor(scene, reflectedRay) {
 
   var xComp = Math.abs(reflectedRay.x),
@@ -68,7 +67,7 @@ function findFaceAndColor(scene, reflectedRay) {
       zComp = Math.abs(reflectedRay.z);
 
   if ( xComp >= yComp && xComp >= zComp ) {
-    if ( reflectedRay.x <= 0 ) { // idk why postivie exactly. I think direction based on center of points
+    if ( reflectedRay.x <= 0 ) { // Look over calculations at this part
         return envMapColor(POSX, reflectedRay);
     }
     else
@@ -84,7 +83,7 @@ function findFaceAndColor(scene, reflectedRay) {
     if ( reflectedRay.z > 0) {
       return envMapColor(NEGZ, reflectedRay);
     }
-    else 
+    else
       return envMapColor(POSZ, reflectedRay);
   }
 }
