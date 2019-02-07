@@ -42,8 +42,7 @@ function envMapColor(face, reflectedRay) {
     var uPixel = Math.floor(uScaled),
         vPixel = Math.floor(vScaled);
 
-    // Could fix this better. Probably has to deal with orientation
-    // of images in relation to the outgoing rays, but didn't have time to fix
+    // Improve logic here later
     var index;
     if (face == NEGY)
       index = ((vPixel * 4 * 1024) + ((1024-uPixel) * 4));
